@@ -4,7 +4,7 @@ from salvar_dados.salvar_dados_sped import *
 from ler_sped_fiscal.ler_sped import ler_sped_fiscal_cliente
 from leitura_xmls import ler_XML_pasta
 from leitura_planilha_empresas import ler_planilha_empresas
-
+import sys
 
 
 
@@ -56,13 +56,16 @@ if __name__ == '__main__':
             print(f"{v['CODIGO_UNICO']}\t\t{v['NOME_PASTA']}")
         print('*' * 50)
         
+        print('\n\n')
             
         print('Escolha a empresa digitando o seu respectivo código no unico ou 1 para sair:')
-        dados_usuario = int(input())
-        if dados_usuario == 1:
-            exit(1)
         try:
+            dados_usuario = int(input())
             codigo_unico = dados_usuario
+            
+            if codigo_unico == 1:
+                
+                break
       
             print('\n')
             if dic_empresas[codigo_unico]:
@@ -76,9 +79,12 @@ if __name__ == '__main__':
             print('\n')
             print('****   empresa não está na lista  ****')
             print('\n')
+            os.system("pause")
+            print('\n')
    
         
-
+    if codigo_unico == 1:
+        sys.exit()
     
     caminho_pasta = caminho_padrao + dic_empresas[codigo_unico].get('NOME_PASTA')
     if not os.listdir(caminho_pasta):
